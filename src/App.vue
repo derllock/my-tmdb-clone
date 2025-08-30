@@ -101,9 +101,13 @@
         </aside>
       </div>
     </transition>
+    
+    <br>
+    <!-- Secondary Navigation -->
+    <SecondaryNav />
 
     <!-- PAGE CONTENT -->
-    <main class="pt-20">
+    <main class="">
       <!-- Hero (uses poster as background with overlay) -->
       <section class="relative" :style="heroStyle">
         <div
@@ -240,6 +244,7 @@
 </template>
 
 <script setup>
+import SecondaryNav from "./components/SecondaryNav.vue";
 import { ref, onMounted, computed } from "vue";
 
 const movie = ref({});
