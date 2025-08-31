@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-black text-white px-6 py-3">
+  <nav class="bg-black text-white py-2">
     <ul class="flex gap-6 justify-center">
       <!-- Overview Dropdown -->
       <li class="relative group">

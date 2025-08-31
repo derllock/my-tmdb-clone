@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-slate-900 text-white">
+  <div class="text-white">
     <!-- TOP NAV (fixed) -->
     <header
       class="fixed inset-x-0 top-0 z-30 bg-slate-900/90 backdrop-blur-sm border-b border-slate-800"
@@ -20,27 +20,27 @@
             <div class="w-5 h-0.5 bg-white"></div>
           </button>
 
-          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 mr-2">
             <div class="font-extrabold text-xl tracking-wide text-emerald-300">
               TMDB
             </div>
             <div class="hidden md:block text-slate-400 text-sm">
               The Movie Database
             </div>
+            </div>
           </div>
-        </div>
 
-        <!-- Center nav (desktop) -->
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-200">
-          <a class="hover:underline" href="#">Movies</a>
-          <a class="hover:underline" href="#">TV Shows</a>
-          <a class="hover:underline" href="#">People</a>
-          <a class="hover:underline" href="#">More</a>
-        </nav>
+          <!-- Center nav (desktop) -->
+          <nav class="hidden md:flex justify-start gap-6 text-sm text-slate-200 flex-2">
+            <a class="hover:underline" href="#">Movies</a>
+            <a class="hover:underline" href="#">TV Shows</a>
+            <a class="hover:underline" href="#">People</a>
+            <a class="hover:underline" href="#">More</a>
+          </nav>
 
         <!-- Right: login/join/search -->
         <div class="flex items-center gap-4">
-          <div class="hidden md:flex items-center gap-3">
+            <div class="hidden md:flex items-center gap-3 ml-auto">
             <button class="px-3 py-1 rounded text-sm border border-slate-700">
               + Add
             </button>
@@ -51,7 +51,7 @@
             >
               Join TMDB
             </button>
-          </div>
+            </div>
 
           <!-- search icon placeholder -->
           <button class="p-2 rounded hover:bg-slate-800 text-sm">Search</button>
@@ -101,19 +101,16 @@
         </aside>
       </div>
     </transition>
-    
-    <br>
-    <!-- Secondary Navigation -->
-    <SecondaryNav />
+
+    <!-- Secondary Navigation (push down so fixed header doesn't overlap) -->
+    <div class="mt-16">
+      <SecondaryNav />
+    </div>
 
     <!-- PAGE CONTENT -->
     <main class="">
       <!-- Hero (uses poster as background with overlay) -->
       <section class="relative" :style="heroStyle">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90"
-        ></div>
-
         <div class="max-w-6xl mx-auto px-4 md:px-6 py-8">
           <div class="flex flex-col md:flex-row md:items-start gap-6">
             <!-- Poster column -->
@@ -134,103 +131,103 @@
             </div>
 
             <!-- Info column -->
-            <div class="flex-1 text-white">
+            <div class="flex-1 text-white text-left">
               <!-- Title -->
-              <h1 class="text-2xl md:text-4xl font-bold leading-tight">
-                {{ movie.Title }}
-                <span class="text-lg font-normal text-slate-300"
-                  >({{ movie.Year }})</span
-                >
+              <h1 class="text-2xl md:text-4xl font-bold leading-tight text-left">
+              {{ movie.Title }}
+              <span class="text-lg font-normal text-slate-300"
+                >({{ movie.Year }})</span
+              >
               </h1>
 
               <!-- Subline: released / runtime / genre -->
               <div
-                class="mt-3 text-slate-300 flex flex-wrap items-center gap-3"
+              class="mt-3 text-slate-300 flex flex-wrap items-center gap-3 text-left"
               >
-                <span
-                  class="px-2 py-1 border rounded border-slate-700 text-sm"
-                  >{{ movie.Rated }}</span
-                >
-                <span class="text-sm">{{ movie.Released }}</span>
-                <span class="hidden md:inline">•</span>
-                <span class="text-sm">{{ movie.Runtime }}</span>
-                <span class="hidden md:inline">•</span>
-                <span class="text-sm">{{ movie.Genre }}</span>
+              <span
+                class="px-2 py-1 border rounded border-slate-700 text-sm text-left"
+                >{{ movie.Rated }}</span
+              >
+              <span class="text-sm text-left">{{ movie.Released }}</span>
+              <span class="hidden md:inline text-left">•</span>
+              <span class="text-sm text-left">{{ movie.Runtime }}</span>
+              <span class="hidden md:inline text-left">•</span>
+              <span class="text-sm text-left">{{ movie.Genre }}</span>
               </div>
 
               <!-- Ratings row -->
-              <div class="mt-6 flex flex-wrap items-center gap-4">
-                <!-- IMDb circle -->
-                <div v-if="imdbRating" class="flex items-center gap-3">
-                  <div
-                    class="w-14 h-14 rounded-full flex items-center justify-center"
-                    :style="imdbCircleStyle"
-                  >
-                    <span class="font-bold text-sm">{{ imdbRating }}</span>
-                  </div>
-                  <div class="text-sm text-slate-300">User Score</div>
-                </div>
-
-                <!-- Other badges -->
-                <div class="flex items-center gap-2">
-                  <span
-                    v-for="r in extraRatings"
-                    :key="r.Source"
-                    :class="
-                      badgeColor(r.Source) +
-                      ' px-2 py-1 rounded text-sm font-medium'
-                    "
-                  >
-                    {{ r.Source }}: {{ r.Value }}
-                  </span>
-                </div>
-
-                <!-- simple actions -->
-                <div class="flex gap-4">
-                  <button class="px-4 py-2 bg-blue-600 text-white rounded">
-                    👍 Like
-                  </button>
-                  <button class="px-4 py-2 bg-gray-700 text-white rounded">
-                    🔖 Bookmark
-                  </button>
-                  <button class="px-4 py-2 bg-green-600 text-white rounded">
-                    ➕ Add to List
-                  </button>
-                </div>
-                <!-- BottomBar.vue -->
+              <div class="mt-6 flex flex-wrap items-center gap-4 text-left">
+              <!-- IMDb circle -->
+              <div v-if="imdbRating" class="flex items-center gap-3 text-left">
                 <div
-                  class="fixed bottom-0 left-0 w-full flex justify-around bg-gray-900 text-white py-3 md:hidden"
+                class="w-14 h-14 rounded-full flex items-center justify-center text-left"
+                :style="imdbCircleStyle"
                 >
-                  <button>👍</button>
-                  <button>🔖</button>
-                  <button>➕</button>
+                <span class="font-bold text-sm text-left">{{ imdbRating }}</span>
                 </div>
+                <div class="text-sm text-slate-300 text-left">User Score</div>
+              </div>
+
+              <!-- Other badges -->
+              <div class="flex items-center gap-2 text-left">
+                <span
+                v-for="r in extraRatings"
+                :key="r.Source"
+                :class="
+                  badgeColor(r.Source) +
+                  ' px-2 py-1 rounded text-sm font-medium text-left'
+                "
+                >
+                {{ r.Source }}: {{ r.Value }}
+                </span>
+              </div>
+
+              <!-- simple actions -->
+              <div class="flex gap-4 text-left">
+                <button class="px-4 py-2 bg-blue-600 text-white rounded text-left">
+                👍 Like
+                </button>
+                <button class="px-4 py-2 bg-gray-700 text-white rounded text-left">
+                🔖 Bookmark
+                </button>
+                <button class="px-4 py-2 bg-green-600 text-white rounded text-left">
+                ➕ Add to List
+                </button>
+              </div>
+              <!-- BottomBar.vue -->
+              <div
+                class="fixed bottom-0 left-0 w-full flex justify-around bg-gray-900 text-white py-3 md:hidden text-left"
+              >
+                <button>👍</button>
+                <button>🔖</button>
+                <button>➕</button>
+              </div>
               </div>
 
               <!-- Overview -->
-              <div class="mt-8">
-                <h2 class="mt-2 text-xl md:text-2xl font-semibold">Overview</h2>
-                <p class="mt-3 text-slate-200 max-w-3xl">
-                  {{ movie.Plot }}
-                </p>
+              <div class="mt-8 text-left">
+              <h2 class="mt-2 text-xl md:text-2xl font-semibold text-left">Overview</h2>
+              <p class="mt-3 text-slate-200 max-w-3xl text-left">
+                {{ movie.Plot }}
+              </p>
               </div>
 
               <!-- Credits block simplified -->
               <div
-                class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm"
+              class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-sm text-left"
               >
-                <div>
-                  <div class="font-semibold">Director</div>
-                  <div class="text-slate-300">{{ movie.Director }}</div>
-                </div>
-                <div>
-                  <div class="font-semibold">Writers</div>
-                  <div class="text-slate-300">{{ movie.Writer }}</div>
-                </div>
-                <div>
-                  <div class="font-semibold">Stars</div>
-                  <div class="text-slate-300">{{ movie.Actors }}</div>
-                </div>
+              <div>
+                <div class="font-semibold text-left">Director</div>
+                <div class="text-slate-300 text-left">{{ movie.Director }}</div>
+              </div>
+              <div>
+                <div class="font-semibold text-left">Writers</div>
+                <div class="text-slate-300 text-left">{{ movie.Writer }}</div>
+              </div>
+              <div>
+                <div class="font-semibold text-left">Stars</div>
+                <div class="text-slate-300 text-left">{{ movie.Actors }}</div>
+              </div>
               </div>
             </div>
             <!-- end info col -->
@@ -286,7 +283,7 @@ const badgeColor = (source) => {
 const heroStyle = computed(() => {
   if (movie.value.Poster && movie.value.Poster !== "N/A") {
     return {
-      backgroundImage: `linear-gradient(rgba(2,6,23,0.6), rgba(2,6,23,0.6)), url(${movie.value.Poster})`,
+      backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.85), rgba(2,6,23,0.80)), url(${movie.value.Poster})`,
       backgroundSize: "cover",
       backgroundPosition: "center",
     };
