@@ -36,3 +36,4 @@ staticfiles/
 local_settings.py
 instance/
 *.sqlite3
+*myvirtualenv/
