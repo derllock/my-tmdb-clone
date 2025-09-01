@@ -13,9 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.urls import path, include
 from rest_framework import routers
-
+from apps.demo.views import PostListView
 
 router = routers.DefaultRouter()
-urlpatterns = [path('', include(router.urls)),]
+urlpatterns = [
+    path('', include(router.urls)),
+    path('api/posts/', PostListView.as_view(), name='post-list'),
+]

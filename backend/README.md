@@ -24,6 +24,59 @@
 
 ---
 
+## API Documentation
+
+
+### Endpoint: List Posts with Comments (Infinite Scrolling)
+
+- **URL:** `/api/posts/`
+- **Method:** `GET`
+- **Description:** Returns a cursor-paginated list of posts ordered by latest timestamp. Each post includes up to 3 latest comments, comment count, and author usernames. Supports infinite scrolling via cursor-based pagination.
+
+#### Query Parameters:
+- `cursor`: Opaque cursor string for pagination (provided in response)
+- `page_size`: Number of posts per page (default: 10)
+
+#### Response Example:
+```
+{
+  "next": "http://127.0.0.1:8000/api/posts/?cursor=abc123",
+  "previous": null,
+  "results": [
+    {
+      "id": "...",
+      "text": "Post text",
+      "timestamp": "2025-09-01T12:34:56Z",
+      "username": "author1",
+      "comment_count": 5,
+      "comments": [
+        {
+          "id": "...",
+          "text": "Comment text",
+          "timestamp": "2025-09-01T12:35:00Z",
+          "username": "commenter1"
+        },
+        // ... up to 3 comments
+      ]
+    },
+    // ... more posts
+  ]
+}
+```
+
+### How to fetch 3 random comments for a post?
+In `PostSerializer.get_comments`, replace:
+```python
+comments = obj.comments.order_by('-timestamp')[:3]
+```
+with:
+```python
+comments = obj.comments.order_by('?')[:3]
+```
+This will return 3 random comments for each post.
+
+---
+
 ## To get started:
 
 1. Set up a virtualenv for this project (The author used Python 3.10.14)
