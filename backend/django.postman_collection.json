@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "59cf82ff-85dd-40d8-bb9c-090615037eb7",
+		"name": "django",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26645568",
+		"_collection_link": "https://lunar-flare-247205.postman.co/workspace/z2i~9c643de9-31d6-4de6-994d-b013d634f8d7/collection/26645568-59cf82ff-85dd-40d8-bb9c-090615037eb7?action=share&source=collection_link&creator=26645568"
+	},
+	"item": [
+		{
+			"name": "django post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/posts/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
